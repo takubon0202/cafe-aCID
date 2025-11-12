@@ -369,8 +369,8 @@ const initialData = {
                 '取扱説明書「故障かな？（スチームが出ない）」'
             ]
         },
-        caramelMacchiato: {
-            id: 'caramelMacchiato',
+        caramel: {
+            id: 'caramel',
             name: 'キャラメルマキアート',
             englishName: 'Caramel Macchiato',
             category: 'ホット',
