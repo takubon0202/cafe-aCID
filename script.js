@@ -172,6 +172,17 @@ function setupEventListeners() {
         navOverlay.classList.remove('active');
     });
 
+    // ヘッダータイトルクリックでホームに戻る
+    const headerTitle = document.getElementById('headerTitle');
+    if (headerTitle) {
+        headerTitle.addEventListener('click', () => {
+            navigateToPage('dashboard');
+            // メニューを閉じる
+            mainNav.classList.remove('open');
+            navOverlay.classList.remove('active');
+        });
+    }
+
     // タブ切り替え
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
