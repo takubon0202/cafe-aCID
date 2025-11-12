@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cafe aCID運営マニュアル</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-mug-hot"></i> cafe aCID運営マニュアル</h1>
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ナビゲーション -->
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#dashboard" class="nav-link active" data-page="dashboard">
+                <i class="fas fa-home"></i> ホーム
+            </a></li>
+            <li><a href="#menu-coffee" class="nav-link" data-page="menu-coffee">
+                <i class="fas fa-coffee"></i> コーヒー
+            </a></li>
+            <li><a href="#menu-espresso" class="nav-link" data-page="menu-espresso">
+                <i class="fas fa-mug-hot"></i> エスプレッソ
+            </a></li>
+            <li><a href="#menu-hot-milk" class="nav-link" data-page="menu-hot-milk">
+                <i class="fas fa-glass-whiskey"></i> ホットミルク
+            </a></li>
+            <li><a href="#menu-caramel" class="nav-link" data-page="menu-caramel">
+                <i class="fas fa-ice-cream"></i> キャラメルマキアート
+            </a></li>
+            <li><a href="#cleaning" class="nav-link" data-page="cleaning">
+                <i class="fas fa-broom"></i> 清掃マニュアル
+            </a></li>
+            <li><a href="#troubleshooting" class="nav-link" data-page="troubleshooting">
+                <i class="fas fa-wrench"></i> トラブルシューティング
+            </a></li>
+            <li><a href="#settings" class="nav-link" data-page="settings">
+                <i class="fas fa-cog"></i> 設定
+            </a></li>
+        </ul>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main class="container">
+        <!-- ダッシュボード -->
+        <section id="dashboard" class="page active">
+            <h2>ダッシュボード</h2>
+
+            <div class="dashboard-grid">
+                <!-- メニューカード -->
+                <div class="section-card">
+                    <h3><i class="fas fa-coffee"></i> メニュー</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-coffee">
+                            <i class="fas fa-coffee"></i>
+                            <span>コーヒー</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-espresso">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>エスプレッソ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-hot-milk">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>ホットミルク</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-caramel">
+                            <i class="fas fa-ice-cream"></i>
+                            <span>キャラメルマキアート</span>
+                            <small>￥300</small>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 今日の清掃チェックリスト -->
+                <div class="section-card">
+                    <h3><i class="fas fa-check-square"></i> 今日の清掃チェックリスト</h3>
+                    <div id="todayChecklist">
+                        <div class="checklist-summary">
+                            <p>完了: <span id="completedCount">0</span> / <span id="totalCount">0</span></p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="navigateToPage('cleaning')">
+                            清掃マニュアルへ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- クイックリンク -->
+                <div class="section-card">
+                    <h3><i class="fas fa-link"></i> クイックリンク</h3>
+                    <div class="quick-links">
+                        <button class="quick-link-btn" onclick="navigateToPage('troubleshooting')">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            トラブルシューティング
+                        </button>
+                        <button class="quick-link-btn" onclick="navigateToPage('cleaning')">
+                            <i class="fas fa-broom"></i>
+                            清掃マニュアル
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- コーヒーマニュアル -->
+        <section id="menu-coffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-coffee"></i> コーヒー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-info">
+                <div class="info-card">
+                    <h4>価格</h4>
+                    <p class="price">￥300</p>
+                </div>
+                <div class="info-card">
+                    <h4>容量</h4>
+                    <p>約30-60mL</p>
+                </div>
+                <div class="info-card">
+                    <h4>所要時間</h4>
+                    <p>約2-3分</p>
+                </div>
+            </div>
+
+            <div class="menu-content" id="coffeeContent"></div>
+        </section>
+
+        <!-- エスプレッソマニュアル -->
+        <section id="menu-espresso" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> エスプレッソ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-info">
+                <div class="info-card">
+                    <h4>価格</h4>
+                    <p class="price">￥300</p>
+                </div>
+                <div class="info-card">
+                    <h4>容量</h4>
+                    <p>約30mL</p>
+                </div>
+                <div class="info-card">
+                    <h4>所要時間</h4>
+                    <p>約1-2分</p>
+                </div>
+            </div>
+
+            <div class="menu-content" id="espressoContent"></div>
+        </section>
+
+        <!-- ホットミルクマニュアル -->
+        <section id="menu-hot-milk" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> ホットミルク</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-info">
+                <div class="info-card">
+                    <h4>価格</h4>
+                    <p class="price">￥300</p>
+                </div>
+                <div class="info-card">
+                    <h4>容量</h4>
+                    <p>約150mL</p>
+                </div>
+                <div class="info-card">
+                    <h4>所要時間</h4>
+                    <p>約2-3分</p>
+                </div>
+            </div>
+
+            <div class="menu-content" id="hotMilkContent"></div>
+        </section>
+
+        <!-- キャラメルマキアートマニュアル -->
+        <section id="menu-caramel" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-ice-cream"></i> キャラメルマキアート</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-info">
+                <div class="info-card">
+                    <h4>価格</h4>
+                    <p class="price">￥300</p>
+                </div>
+                <div class="info-card">
+                    <h4>容量</h4>
+                    <p>約180-210mL</p>
+                </div>
+                <div class="info-card">
+                    <h4>所要時間</h4>
+                    <p>約4-5分</p>
+                </div>
+            </div>
+
+            <div class="menu-content" id="caramelContent"></div>
+        </section>
+
+        <!-- 清掃マニュアル -->
+        <section id="cleaning" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-broom"></i> 清掃マニュアル</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="daily">日次清掃</button>
+                <button class="tab-btn" data-tab="weekly">週次清掃</button>
+                <button class="tab-btn" data-tab="monthly">月次清掃</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="daily-tab" class="tab-pane active">
+                    <div class="cleaning-section" id="dailyTasks"></div>
+                </div>
+                <div id="weekly-tab" class="tab-pane">
+                    <div class="cleaning-section" id="weeklyTasks"></div>
+                </div>
+                <div id="monthly-tab" class="tab-pane">
+                    <div class="cleaning-section" id="monthlyTasks"></div>
+                </div>
+            </div>
+
+            <div class="cleaning-calendar">
+                <h3>清掃履歴カレンダー</h3>
+                <div id="cleaningCalendar">
+                    <!-- Googleカレンダーが設定されている場合はここに表示 -->
+                </div>
+                <p class="calendar-note">
+                    <i class="fas fa-info-circle"></i>
+                    Googleカレンダーを表示するには、<a href="#settings" onclick="navigateToPage('settings')">設定ページ</a>でカレンダーURLを設定してください。
+                </p>
+            </div>
+        </section>
+
+        <!-- トラブルシューティング -->
+        <section id="troubleshooting" class="page">
+            <h2><i class="fas fa-wrench"></i> トラブルシューティング</h2>
+
+            <div class="troubleshooting-section" id="troubleshootingContent"></div>
+        </section>
+
+        <!-- 設定 -->
+        <section id="settings" class="page">
+            <h2><i class="fas fa-cog"></i> 設定</h2>
+
+            <div class="settings-section">
+                <div class="setting-card">
+                    <h3><i class="fas fa-calendar-alt"></i> カレンダー連携</h3>
+                    <p class="setting-description">清掃履歴を管理するためのカレンダーを埋め込みます。Googleカレンダー、Outlookカレンダーなど、任意のカレンダーサービスの埋め込みコードを使用できます。</p>
+
+                    <div class="calendar-setup-steps">
+                        <h4>設定手順（Googleカレンダーの場合）：</h4>
+                        <ol>
+                            <li>Googleカレンダーで清掃用カレンダーを作成</li>
+                            <li>カレンダーの「設定と共有」を開く</li>
+                            <li>「アクセス権限」で「一般公開して誰でも利用できるようにする」をオン</li>
+                            <li>「カレンダーの統合」セクションの「埋め込みコード」をコピー</li>
+                            <li>下のテキストエリアに貼り付けて保存</li>
+                        </ol>
+                        <p><small>※ 他のカレンダーサービスの場合も、同様に埋め込みコード（iframe）を取得して貼り付けてください</small></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calendarEmbedCode">カレンダー埋め込みコード（iframe）:</label>
+                        <textarea
+                            id="calendarEmbedCode"
+                            placeholder='<iframe src="https://calendar.google.com/calendar/embed?src=..." style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>'
+                            class="input-field"
+                            rows="6"
+                        ></textarea>
+                    </div>
+
+                    <div class="setting-actions">
+                        <button class="btn btn-primary" onclick="saveCalendarSettings()">
+                            <i class="fas fa-save"></i> 保存
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearCalendarSettings()">
+                            <i class="fas fa-trash"></i> クリア
+                        </button>
+                    </div>
+
+                    <div id="calendarSaveStatus" class="save-status"></div>
+                </div>
+
+                <div class="setting-card">
+                    <h3>データ管理</h3>
+                    <button class="btn btn-primary" onclick="backupData()">
+                        <i class="fas fa-download"></i> データをバックアップ
+                    </button>
+                    <button class="btn btn-secondary" onclick="restoreData()">
+                        <i class="fas fa-upload"></i> データを復元
+                    </button>
+                </div>
+
+                <div class="setting-card">
+                    <h3>マニュアル編集</h3>
+                    <label class="switch">
+                        <input type="checkbox" id="editMode">
+                        <span class="slider"></span>
+                    </label>
+                    <label for="editMode">編集モード</label>
+                </div>
+
+                <div class="setting-card">
+                    <h3>更新履歴</h3>
+                    <div id="updateHistory"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 画像モーダル -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption"></div>
+    </div>
+
+    <!-- フッター -->
+    <footer>
+        <p>&copy; 2025 cafe aCID - デロンギ マグニフィカS 運営マニュアル</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
