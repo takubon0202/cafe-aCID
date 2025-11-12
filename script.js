@@ -5,6 +5,7 @@
 // グローバル変数
 let menuData = {};
 let cleaningData = {};
+let serviceData = {};
 let settings = {};
 
 // ===================================
@@ -73,6 +74,10 @@ function loadData() {
     const savedCleaningData = localStorage.getItem(STORAGE_KEYS.CLEANING_DATA);
     cleaningData = savedCleaningData ? JSON.parse(savedCleaningData) : initialData.cleaning;
 
+    // 提供方法データの読み込み
+    const savedServiceData = localStorage.getItem(STORAGE_KEYS.SERVICE_DATA);
+    serviceData = savedServiceData ? JSON.parse(savedServiceData) : initialData.service;
+
     // 設定の読み込み
     const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
     settings = savedSettings ? JSON.parse(savedSettings) : defaultSettings;
@@ -86,6 +91,9 @@ function loadData() {
     // 清掃ページをレンダリング
     renderCleaningPages();
 
+    // 提供方法ページをレンダリング
+    renderServicePage();
+
     // トラブルシューティングをレンダリング
     renderTroubleshooting();
 
@@ -96,6 +104,7 @@ function loadData() {
 function saveData() {
     localStorage.setItem(STORAGE_KEYS.MENU_DATA, JSON.stringify(menuData));
     localStorage.setItem(STORAGE_KEYS.CLEANING_DATA, JSON.stringify(cleaningData));
+    localStorage.setItem(STORAGE_KEYS.SERVICE_DATA, JSON.stringify(serviceData));
     localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
 
     // 更新履歴を記録
@@ -771,6 +780,237 @@ function renderCalendar() {
 
         calendarContainer.innerHTML = '';
         calendarContainer.appendChild(iframe);
+    }
+}
+
+// ===================================
+// 提供方法マニュアル
+// ===================================
+
+function renderServicePage() {
+    const container = document.getElementById('serviceContent');
+    if (!container || !serviceData) return;
+
+    let html = '';
+
+    // 概要
+    if (serviceData.overview) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-info-circle"></i> ${serviceData.overview.title}</h3>`;
+        html += '<ul>';
+        serviceData.overview.content.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
+
+    // 設備配置
+    if (serviceData.facilities) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-map-marked-alt"></i> ${serviceData.facilities.title}</h3>`;
+        html += '<table class="facilities-table">';
+        html += '<thead><tr><th>設備</th><th>数量</th><th>設置場所</th><th>備考</th></tr></thead>';
+        html += '<tbody>';
+        serviceData.facilities.items.forEach(item => {
+            html += '<tr>';
+            html += `<td>${item.equipment}</td>`;
+            html += `<td>${item.quantity}</td>`;
+            html += `<td>${item.location}</td>`;
+            html += `<td>${item.notes}</td>`;
+            html += '</tr>';
+        });
+        html += '</tbody>';
+        html += '</table>';
+        if (serviceData.facilities.flowNotes) {
+            html += '<ul class="flow-notes">';
+            serviceData.facilities.flowNotes.forEach(note => {
+                html += `<li>${note}</li>`;
+            });
+            html += '</ul>';
+        }
+        html += '</div>';
+    }
+
+    // 役割分担
+    if (serviceData.roles) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-users"></i> ${serviceData.roles.title}</h3>`;
+        serviceData.roles.staff.forEach(staff => {
+            html += '<div class="role-card">';
+            html += `<h4>${staff.position}</h4>`;
+            html += '<ul>';
+            staff.responsibilities.forEach(resp => {
+                html += `<li>${resp}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    // 番号札運用
+    if (serviceData.numberTag) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-ticket-alt"></i> ${serviceData.numberTag.title}</h3>`;
+        serviceData.numberTag.flow.forEach(item => {
+            html += '<div class="flow-step">';
+            html += `<strong>${item.step}</strong>`;
+            html += `<p>${item.description}</p>`;
+            html += '</div>';
+        });
+        if (serviceData.numberTag.notes) {
+            html += '<div class="notes">';
+            html += '<strong>注意点:</strong><ul>';
+            serviceData.numberTag.notes.forEach(note => {
+                html += `<li>${note}</li>`;
+            });
+            html += '</ul></div>';
+        }
+        html += '</div>';
+    }
+
+    // トレー運用
+    if (serviceData.tray) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-clipboard-list"></i> ${serviceData.tray.title}</h3>`;
+        serviceData.tray.operations.forEach(op => {
+            html += '<div class="operation-card">';
+            html += `<h4>${op.action}</h4>`;
+            html += `<p>${op.procedure}</p>`;
+            html += `<p class="tips"><i class="fas fa-lightbulb"></i> ${op.tips}</p>`;
+            html += '</div>';
+        });
+        if (serviceData.tray.expression) {
+            html += `<p class="expression">${serviceData.tray.expression}</p>`;
+        }
+        html += '</div>';
+    }
+
+    // 返却口運用
+    if (serviceData.returnCounter) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-undo"></i> ${serviceData.returnCounter.title}</h3>`;
+        html += '<div class="subsection">';
+        html += '<h4>設置</h4><ul>';
+        serviceData.returnCounter.setup.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+        html += '<div class="subsection">';
+        html += '<h4>運用</h4><ul>';
+        serviceData.returnCounter.operations.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+        html += '<div class="subsection">';
+        html += '<h4>混雑時</h4><ul>';
+        serviceData.returnCounter.congestion.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul></div>';
+        html += '</div>';
+    }
+
+    // フロー（来店〜退店）
+    if (serviceData.flow) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-route"></i> ${serviceData.flow.title}</h3>`;
+        html += '<ol class="flow-list">';
+        serviceData.flow.steps.forEach(step => {
+            html += `<li><strong>${step.action}</strong>: ${step.detail}</li>`;
+        });
+        html += '</ol>';
+
+        // Mermaidダイアグラム
+        if (serviceData.flow.mermaid) {
+            html += '<div class="mermaid-container">';
+            html += '<h4>フローチャート</h4>';
+            html += '<pre class="mermaid">' + serviceData.flow.mermaid + '</pre>';
+            html += '</div>';
+        }
+
+        if (serviceData.flow.notes) {
+            html += '<div class="notes">';
+            html += '<strong>注記:</strong><ul>';
+            serviceData.flow.notes.forEach(note => {
+                html += `<li>${note}</li>`;
+            });
+            html += '</ul></div>';
+        }
+        html += '</div>';
+    }
+
+    // 安全・衛生
+    if (serviceData.safety) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-shield-alt"></i> ${serviceData.safety.title}</h3>`;
+        serviceData.safety.items.forEach(item => {
+            html += '<div class="safety-card">';
+            html += `<h4>${item.category}</h4>`;
+            html += '<ul>';
+            item.measures.forEach(measure => {
+                html += `<li>${measure}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    // 混雑時の運用
+    if (serviceData.congestion) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-exclamation-triangle"></i> ${serviceData.congestion.title}</h3>`;
+        html += '<table class="congestion-table">';
+        html += '<thead><tr><th>状況</th><th>対応</th></tr></thead>';
+        html += '<tbody>';
+        serviceData.congestion.scenarios.forEach(scenario => {
+            html += '<tr>';
+            html += `<td>${scenario.situation}</td>`;
+            html += `<td>${scenario.action}</td>`;
+            html += '</tr>';
+        });
+        html += '</tbody>';
+        html += '</table>';
+        html += '</div>';
+    }
+
+    // 掲示物・サイン
+    if (serviceData.signage) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-sign"></i> ${serviceData.signage.title}</h3>`;
+        serviceData.signage.signs.forEach(sign => {
+            html += '<div class="sign-card">';
+            html += `<h4>${sign.location}</h4>`;
+            html += `<pre class="sign-text">${sign.text}</pre>`;
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    // チェックリスト
+    if (serviceData.checklist) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-tasks"></i> ${serviceData.checklist.title}</h3>`;
+        serviceData.checklist.periods.forEach(period => {
+            html += '<div class="checklist-period">';
+            html += `<h4>${period.period}</h4>`;
+            html += '<ul class="checklist">';
+            period.items.forEach(item => {
+                html += `<li><input type="checkbox"> ${item}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+
+    // Mermaid図を初期化（CDNが読み込まれている場合）
+    if (typeof mermaid !== 'undefined') {
+        mermaid.init(undefined, document.querySelectorAll('.mermaid'));
     }
 }
 

@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    </script>
 </head>
 <body>
     <!-- ヘッダー -->
@@ -126,6 +130,9 @@
             </li>
 
             <!-- マニュアル・設定 -->
+            <li><a href="#service" class="nav-link" data-page="service">
+                <i class="fas fa-store"></i> 提供方法
+            </a></li>
             <li><a href="#cleaning" class="nav-link" data-page="cleaning">
                 <i class="fas fa-broom"></i> 清掃マニュアル
             </a></li>
@@ -845,6 +852,20 @@
                     <div class="hygiene-section" id="managerHygieneContent"></div>
                 </div>
             </div>
+        </section>
+
+        <!-- 提供方法マニュアル -->
+        <section id="service" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-store"></i> 提供方法（オペレーション）</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="service-content" id="serviceContent"></div>
         </section>
 
         <!-- 設定 -->
