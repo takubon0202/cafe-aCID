@@ -25,20 +25,112 @@
             <li><a href="#dashboard" class="nav-link active" data-page="dashboard">
                 <i class="fas fa-home"></i> ホーム
             </a></li>
-            <li><a href="#menu-coffee" class="nav-link" data-page="menu-coffee">
-                <i class="fas fa-coffee"></i> コーヒー
-            </a></li>
-            <li><a href="#menu-espresso" class="nav-link" data-page="menu-espresso">
-                <i class="fas fa-mug-hot"></i> エスプレッソ
-            </a></li>
-            <li><a href="#menu-hot-milk" class="nav-link" data-page="menu-hot-milk">
-                <i class="fas fa-glass-whiskey"></i> ホットミルク
-            </a></li>
-            <li><a href="#menu-caramel" class="nav-link" data-page="menu-caramel">
-                <i class="fas fa-ice-cream"></i> キャラメルマキアート
-            </a></li>
+
+            <!-- ホットメニュー -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-coffee"></i> ホットメニュー
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-coffee" class="nav-link" data-page="menu-coffee">
+                        <i class="fas fa-mug-hot"></i> コーヒー
+                    </a></li>
+                    <li><a href="#menu-espresso" class="nav-link" data-page="menu-espresso">
+                        <i class="fas fa-mug-hot"></i> エスプレッソ
+                    </a></li>
+                    <li><a href="#menu-hot-milk" class="nav-link" data-page="menu-hot-milk">
+                        <i class="fas fa-glass-whiskey"></i> ホットミルク
+                    </a></li>
+                    <li><a href="#menu-caramel" class="nav-link" data-page="menu-caramel">
+                        <i class="fas fa-ice-cream"></i> キャラメルマキアート
+                    </a></li>
+                    <li><a href="#menu-caffeLatte" class="nav-link" data-page="menu-caffeLatte">
+                        <i class="fas fa-mug-hot"></i> カフェラテ
+                    </a></li>
+                    <li><a href="#menu-caffeOle" class="nav-link" data-page="menu-caffeOle">
+                        <i class="fas fa-mug-hot"></i> カフェオレ
+                    </a></li>
+                    <li><a href="#menu-caffeMocha" class="nav-link" data-page="menu-caffeMocha">
+                        <i class="fas fa-mug-hot"></i> カフェモカ
+                    </a></li>
+                    <li><a href="#menu-wienerCoffee" class="nav-link" data-page="menu-wienerCoffee">
+                        <i class="fas fa-mug-hot"></i> ウィンナーコーヒー
+                    </a></li>
+                    <li><a href="#menu-affogato" class="nav-link" data-page="menu-affogato">
+                        <i class="fas fa-ice-cream"></i> アフォガード
+                    </a></li>
+                    <li><a href="#menu-decafCoffee" class="nav-link" data-page="menu-decafCoffee">
+                        <i class="fas fa-mug-hot"></i> カフェインレスコーヒー
+                    </a></li>
+                </ul>
+            </li>
+
+            <!-- アイスメニュー -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-glass-whiskey"></i> アイスメニュー
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-icedCoffee" class="nav-link" data-page="menu-icedCoffee">
+                        <i class="fas fa-glass-whiskey"></i> アイスコーヒー
+                    </a></li>
+                    <li><a href="#menu-icedEspresso" class="nav-link" data-page="menu-icedEspresso">
+                        <i class="fas fa-glass-whiskey"></i> アイスエスプレッソ
+                    </a></li>
+                    <li><a href="#menu-icedCaffeLatte" class="nav-link" data-page="menu-icedCaffeLatte">
+                        <i class="fas fa-glass-whiskey"></i> アイスカフェラテ
+                    </a></li>
+                    <li><a href="#menu-icedCaffeOle" class="nav-link" data-page="menu-icedCaffeOle">
+                        <i class="fas fa-glass-whiskey"></i> アイスカフェオレ
+                    </a></li>
+                    <li><a href="#menu-icedWienerCoffee" class="nav-link" data-page="menu-icedWienerCoffee">
+                        <i class="fas fa-glass-whiskey"></i> アイス・ウィンナーコーヒー
+                    </a></li>
+                    <li><a href="#menu-icedCaffeMocha" class="nav-link" data-page="menu-icedCaffeMocha">
+                        <i class="fas fa-glass-whiskey"></i> アイスカフェモカ
+                    </a></li>
+                    <li><a href="#menu-icedCaramelMacchiato" class="nav-link" data-page="menu-icedCaramelMacchiato">
+                        <i class="fas fa-glass-whiskey"></i> アイス・キャラメルマキアート
+                    </a></li>
+                    <li><a href="#menu-icedDecafCoffee" class="nav-link" data-page="menu-icedDecafCoffee">
+                        <i class="fas fa-glass-whiskey"></i> カフェインレスコーヒー(アイス)
+                    </a></li>
+                </ul>
+            </li>
+
+            <!-- ジュース・ソーダ -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-glass-martini-alt"></i> ジュース・ソーダ
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-cocoa" class="nav-link" data-page="menu-cocoa">
+                        <i class="fas fa-mug-hot"></i> ココア
+                    </a></li>
+                    <li><a href="#menu-appleJuice" class="nav-link" data-page="menu-appleJuice">
+                        <i class="fas fa-glass-martini-alt"></i> りんごジュース
+                    </a></li>
+                    <li><a href="#menu-orangeJuice" class="nav-link" data-page="menu-orangeJuice">
+                        <i class="fas fa-glass-martini-alt"></i> オレンジジュース
+                    </a></li>
+                    <li><a href="#menu-melonSoda" class="nav-link" data-page="menu-melonSoda">
+                        <i class="fas fa-glass-martini-alt"></i> メロンソーダ
+                    </a></li>
+                    <li><a href="#menu-creamSoda" class="nav-link" data-page="menu-creamSoda">
+                        <i class="fas fa-glass-martini-alt"></i> クリームソーダ
+                    </a></li>
+                </ul>
+            </li>
+
+            <!-- マニュアル・設定 -->
             <li><a href="#cleaning" class="nav-link" data-page="cleaning">
                 <i class="fas fa-broom"></i> 清掃マニュアル
+            </a></li>
+            <li><a href="#hygiene" class="nav-link" data-page="hygiene">
+                <i class="fas fa-hand-sparkles"></i> 衛生マニュアル
             </a></li>
             <li><a href="#troubleshooting" class="nav-link" data-page="troubleshooting">
                 <i class="fas fa-wrench"></i> トラブルシューティング
@@ -49,6 +141,9 @@
         </ul>
     </nav>
 
+    <!-- ナビゲーションオーバーレイ（モバイル用） -->
+    <div id="navOverlay" class="nav-overlay"></div>
+
     <!-- メインコンテンツ -->
     <main class="container">
         <!-- ダッシュボード -->
@@ -58,7 +153,7 @@
             <div class="dashboard-grid">
                 <!-- メニューカード -->
                 <div class="section-card">
-                    <h3><i class="fas fa-coffee"></i> メニュー</h3>
+                    <h3><i class="fas fa-coffee"></i> ホットメニュー</h3>
                     <div class="menu-buttons">
                         <button class="menu-btn" data-page="menu-coffee">
                             <i class="fas fa-coffee"></i>
@@ -78,6 +173,113 @@
                         <button class="menu-btn" data-page="menu-caramel">
                             <i class="fas fa-ice-cream"></i>
                             <span>キャラメルマキアート</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-caffeLatte">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>カフェラテ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-caffeOle">
+                            <i class="fas fa-coffee"></i>
+                            <span>カフェオレ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-caffeMocha">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>カフェモカ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-wienerCoffee">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>ウィンナーコーヒー</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-affogato">
+                            <i class="fas fa-ice-cream"></i>
+                            <span>アフォガード</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-decafCoffee">
+                            <i class="fas fa-coffee"></i>
+                            <span>カフェインレスコーヒー</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-cocoa">
+                            <i class="fas fa-mug-hot"></i>
+                            <span>ココア</span>
+                            <small>￥300</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-glass-whiskey"></i> アイスメニュー</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-icedCoffee">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイスコーヒー</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedEspresso">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>エスプレッソ・オン・アイス</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedCaffeLatte">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイスカフェラテ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedCaffeOle">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイスカフェオレ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedWienerCoffee">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイス・ウィンナーコーヒー</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedCaffeMocha">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイスカフェモカ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedCaramelMacchiato">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>アイス・キャラメルマキアート</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-icedDecafCoffee">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>カフェインレスコーヒー（アイス）</span>
+                            <small>￥300</small>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section-card">
+                    <h3><i class="fas fa-glass-whiskey"></i> ジュース・ソーダ</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-appleJuice">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>りんごジュース</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-orangeJuice">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>オレンジジュース</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-melonSoda">
+                            <i class="fas fa-glass-whiskey"></i>
+                            <span>メロンソーダ</span>
+                            <small>￥300</small>
+                        </button>
+                        <button class="menu-btn" data-page="menu-creamSoda">
+                            <i class="fas fa-ice-cream"></i>
+                            <span>クリームソーダ</span>
                             <small>￥300</small>
                         </button>
                     </div>
@@ -229,6 +431,348 @@
             <div class="menu-content" id="caramelContent"></div>
         </section>
 
+        <!-- カフェラテマニュアル -->
+        <section id="menu-caffeLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> カフェラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約180mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約4-5分</p></div>
+            </div>
+            <div class="menu-content" id="caffeLatteContent"></div>
+        </section>
+
+        <!-- カフェオレマニュアル -->
+        <section id="menu-caffeOle" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-coffee"></i> カフェオレ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="caffeOleContent"></div>
+        </section>
+
+        <!-- カフェモカマニュアル -->
+        <section id="menu-caffeMocha" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> カフェモカ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約200mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約5-6分</p></div>
+            </div>
+            <div class="menu-content" id="caffeMochaContent"></div>
+        </section>
+
+        <!-- ウィンナーコーヒーマニュアル -->
+        <section id="menu-wienerCoffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> ウィンナーコーヒー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約150mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="wienerCoffeeContent"></div>
+        </section>
+
+        <!-- アフォガードマニュアル -->
+        <section id="menu-affogato" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-ice-cream"></i> アフォガード</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約90-110mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約2-3分</p></div>
+            </div>
+            <div class="menu-content" id="affogatoContent"></div>
+        </section>
+
+        <!-- カフェインレスコーヒーマニュアル -->
+        <section id="menu-decafCoffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-coffee"></i> カフェインレスコーヒー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約120mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約2-3分</p></div>
+            </div>
+            <div class="menu-content" id="decafCoffeeContent"></div>
+        </section>
+
+        <!-- アイスコーヒーマニュアル -->
+        <section id="menu-icedCoffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイスコーヒー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="icedCoffeeContent"></div>
+        </section>
+
+        <!-- エスプレッソ・オン・アイスマニュアル -->
+        <section id="menu-icedEspresso" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> エスプレッソ・オン・アイス</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約180-240mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約2-3分</p></div>
+            </div>
+            <div class="menu-content" id="icedEspressoContent"></div>
+        </section>
+
+        <!-- アイスカフェラテマニュアル -->
+        <section id="menu-icedCaffeLatte" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイスカフェラテ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約270mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="icedCaffeLatteContent"></div>
+        </section>
+
+        <!-- アイスカフェオレマニュアル -->
+        <section id="menu-icedCaffeOle" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイスカフェオレ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約300mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="icedCaffeOleContent"></div>
+        </section>
+
+        <!-- アイス・ウィンナーコーヒーマニュアル -->
+        <section id="menu-icedWienerCoffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイス・ウィンナーコーヒー</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約270mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="icedWienerCoffeeContent"></div>
+        </section>
+
+        <!-- アイスカフェモカマニュアル -->
+        <section id="menu-icedCaffeMocha" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイスカフェモカ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約300mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約4-5分</p></div>
+            </div>
+            <div class="menu-content" id="icedCaffeMochaContent"></div>
+        </section>
+
+        <!-- アイス・キャラメルマキアートマニュアル -->
+        <section id="menu-icedCaramelMacchiato" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> アイス・キャラメルマキアート</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約300mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約4-5分</p></div>
+            </div>
+            <div class="menu-content" id="icedCaramelMacchiatoContent"></div>
+        </section>
+
+        <!-- カフェインレスコーヒー（アイス）マニュアル -->
+        <section id="menu-icedDecafCoffee" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> カフェインレスコーヒー（アイス）</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="icedDecafCoffeeContent"></div>
+        </section>
+
+        <!-- ココアマニュアル -->
+        <section id="menu-cocoa" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-mug-hot"></i> ココア</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約150mL（ホット）/ 約240mL（アイス）</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約5-6分</p></div>
+            </div>
+            <div class="menu-content" id="cocoaContent"></div>
+        </section>
+
+        <!-- りんごジュースマニュアル -->
+        <section id="menu-appleJuice" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> りんごジュース</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約200mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1-2分</p></div>
+            </div>
+            <div class="menu-content" id="appleJuiceContent"></div>
+        </section>
+
+        <!-- オレンジジュースマニュアル -->
+        <section id="menu-orangeJuice" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> オレンジジュース</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約200mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約1-2分</p></div>
+            </div>
+            <div class="menu-content" id="orangeJuiceContent"></div>
+        </section>
+
+        <!-- メロンソーダマニュアル -->
+        <section id="menu-melonSoda" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> メロンソーダ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約240mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約2-3分</p></div>
+            </div>
+            <div class="menu-content" id="melonSodaContent"></div>
+        </section>
+
+        <!-- クリームソーダマニュアル -->
+        <section id="menu-creamSoda" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-glass-whiskey"></i> クリームソーダ</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>約300mL</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-4分</p></div>
+            </div>
+            <div class="menu-content" id="creamSodaContent"></div>
+        </section>
+
         <!-- 清掃マニュアル -->
         <section id="cleaning" class="page">
             <div class="page-header">
@@ -275,6 +819,32 @@
             <h2><i class="fas fa-wrench"></i> トラブルシューティング</h2>
 
             <div class="troubleshooting-section" id="troubleshootingContent"></div>
+        </section>
+
+        <!-- 衛生マニュアル -->
+        <section id="hygiene" class="page">
+            <div class="page-header">
+                <h2><i class="fas fa-hand-sparkles"></i> 衛生マニュアル</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="staff">スタッフ用</button>
+                <button class="tab-btn" data-tab="manager">責任者・教育用</button>
+            </div>
+
+            <div class="tab-content">
+                <div id="staff-tab" class="tab-pane active">
+                    <div class="hygiene-section" id="staffHygieneContent"></div>
+                </div>
+                <div id="manager-tab" class="tab-pane">
+                    <div class="hygiene-section" id="managerHygieneContent"></div>
+                </div>
+            </div>
         </section>
 
         <!-- 設定 -->

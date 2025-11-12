@@ -22,6 +22,9 @@ function initializeApp() {
     // イベントリスナーの設定
     setupEventListeners();
 
+    // ナビゲーションの初期化（モバイルでは非表示）
+    initializeNavigation();
+
     // 初期ページの表示
     showPage('dashboard');
 
@@ -35,6 +38,16 @@ function initializeApp() {
     loadCalendarSettings();
 }
 
+// ナビゲーションの初期化
+function initializeNavigation() {
+    const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+
+    // 初期状態では常に閉じている
+    mainNav.classList.remove('open');
+    navOverlay.classList.remove('active');
+}
+
 // ===================================
 // データ管理
 // ===================================
@@ -42,7 +55,19 @@ function initializeApp() {
 function loadData() {
     // メニューデータの読み込み
     const savedMenuData = localStorage.getItem(STORAGE_KEYS.MENU_DATA);
-    menuData = savedMenuData ? JSON.parse(savedMenuData) : initialData.menu;
+    if (savedMenuData) {
+        menuData = JSON.parse(savedMenuData);
+        // initialDataに新しいメニューがあれば追加
+        Object.keys(initialData.menu).forEach(menuId => {
+            if (!menuData[menuId]) {
+                menuData[menuId] = initialData.menu[menuId];
+            }
+        });
+        // 更新されたメニューデータを保存
+        localStorage.setItem(STORAGE_KEYS.MENU_DATA, JSON.stringify(menuData));
+    } else {
+        menuData = initialData.menu;
+    }
 
     // 清掃データの読み込み
     const savedCleaningData = localStorage.getItem(STORAGE_KEYS.CLEANING_DATA);
@@ -63,6 +88,9 @@ function loadData() {
 
     // トラブルシューティングをレンダリング
     renderTroubleshooting();
+
+    // 衛生マニュアルをレンダリング
+    renderHygiene();
 }
 
 function saveData() {
@@ -102,6 +130,12 @@ function setupEventListeners() {
             e.preventDefault();
             const page = e.currentTarget.dataset.page;
             navigateToPage(page);
+
+            // メニューを閉じる
+            const mainNav = document.getElementById('mainNav');
+            const navOverlay = document.getElementById('navOverlay');
+            mainNav.classList.remove('open');
+            navOverlay.classList.remove('active');
         });
     });
 
@@ -113,11 +147,20 @@ function setupEventListeners() {
         });
     });
 
-    // メニュートグル（モバイル）
+    // メニュートグル（サイドバー）
     const menuToggle = document.getElementById('menuToggle');
     const mainNav = document.getElementById('mainNav');
+    const navOverlay = document.getElementById('navOverlay');
+
     menuToggle.addEventListener('click', () => {
         mainNav.classList.toggle('open');
+        navOverlay.classList.toggle('active');
+    });
+
+    // オーバーレイクリックで閉じる
+    navOverlay.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        navOverlay.classList.remove('active');
     });
 
     // タブ切り替え
@@ -153,6 +196,12 @@ function setupEventListeners() {
 // ===================================
 // ナビゲーション
 // ===================================
+
+// ナビゲーションカテゴリーの折りたたみ切り替え
+function toggleNavCategory(header) {
+    const category = header.parentElement;
+    category.classList.toggle('collapsed');
+}
 
 function navigateToPage(pageId) {
     showPage(pageId);
@@ -210,6 +259,18 @@ function renderMenuPages() {
 
         let html = '';
 
+        // 注意事項セクション
+        if (menu.warnings && menu.warnings.length > 0) {
+            html += '<div class="warnings-section">';
+            html += '<h3><i class="fas fa-exclamation-triangle"></i> 注意事項</h3>';
+            html += '<ul class="warnings-list">';
+            menu.warnings.forEach(warning => {
+                html += `<li>${warning}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        }
+
         // 材料セクション
         html += '<div class="ingredients-section">';
         html += '<h3><i class="fas fa-shopping-basket"></i> 材料</h3>';
@@ -248,6 +309,54 @@ function renderMenuPages() {
                 html += `<div class="solution"><strong>解決策:</strong> ${item.solution}</div>`;
                 html += '</div>';
             });
+            html += '</div>';
+        }
+
+        // 品質基準セクション
+        if (menu.qualityStandards && menu.qualityStandards.length > 0) {
+            html += '<div class="quality-section">';
+            html += '<h3><i class="fas fa-star"></i> 品質基準</h3>';
+            html += '<ul class="quality-list">';
+            menu.qualityStandards.forEach(standard => {
+                html += `<li>${standard}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        }
+
+        // バリエーションセクション
+        if (menu.variations && menu.variations.length > 0) {
+            html += '<div class="variations-section">';
+            html += '<h3><i class="fas fa-magic"></i> バリエーション</h3>';
+            html += '<ul class="variations-list">';
+            menu.variations.forEach(variation => {
+                html += `<li>${variation}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        }
+
+        // 清掃セクション
+        if (menu.cleaning && menu.cleaning.length > 0) {
+            html += '<div class="cleaning-section">';
+            html += '<h3><i class="fas fa-broom"></i> 清掃・お手入れ</h3>';
+            html += '<ul class="cleaning-list">';
+            menu.cleaning.forEach(cleanItem => {
+                html += `<li>${cleanItem}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        }
+
+        // 参照セクション
+        if (menu.references && menu.references.length > 0) {
+            html += '<div class="references-section">';
+            html += '<h3><i class="fas fa-book"></i> 参照</h3>';
+            html += '<ul class="references-list">';
+            menu.references.forEach(reference => {
+                html += `<li>${reference}</li>`;
+            });
+            html += '</ul>';
             html += '</div>';
         }
 
@@ -663,4 +772,106 @@ function renderCalendar() {
         calendarContainer.innerHTML = '';
         calendarContainer.appendChild(iframe);
     }
+}
+
+// ===================================
+// 衛生マニュアル
+// ===================================
+
+function renderHygiene() {
+    renderStaffHygiene();
+    renderManagerHygiene();
+}
+
+function renderStaffHygiene() {
+    const container = document.getElementById('staffHygieneContent');
+    if (!container) return;
+
+    const data = initialData.hygiene.staff;
+    let html = '';
+
+    // タイトルとサブタイトル
+    html += `<div class="hygiene-header">`;
+    html += `<h3>${data.title}</h3>`;
+    html += `<p class="hygiene-subtitle">${data.subtitle}</p>`;
+    html += `</div>`;
+
+    // セクション
+    data.sections.forEach(section => {
+        html += `<div class="hygiene-item">`;
+        html += `<h4><i class="fas fa-clipboard-check"></i> ${section.title}</h4>`;
+
+        if (section.items) {
+            html += '<ul>';
+            section.items.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+
+        if (section.subsections) {
+            section.subsections.forEach(subsection => {
+                html += `<div class="hygiene-subsection">`;
+                html += `<h5>${subsection.subtitle}</h5>`;
+                html += '<ul>';
+                subsection.items.forEach(item => {
+                    html += `<li>${item}</li>`;
+                });
+                html += '</ul>';
+                html += '</div>';
+            });
+        }
+
+        html += '</div>';
+    });
+
+    container.innerHTML = html;
+}
+
+function renderManagerHygiene() {
+    const container = document.getElementById('managerHygieneContent');
+    if (!container) return;
+
+    const data = initialData.hygiene.manager;
+    let html = '';
+
+    // タイトルとサブタイトル
+    html += `<div class="hygiene-header">`;
+    html += `<h3>${data.title}</h3>`;
+    html += `<p class="hygiene-subtitle">${data.subtitle}</p>`;
+    if (data.description) {
+        html += `<p class="hygiene-description">${data.description.replace(/\n/g, '<br>')}</p>`;
+    }
+    html += `</div>`;
+
+    // セクション
+    data.sections.forEach(section => {
+        html += `<div class="hygiene-item">`;
+        html += `<h4><i class="fas fa-clipboard-check"></i> ${section.title}</h4>`;
+
+        if (section.items) {
+            html += '<ul>';
+            section.items.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+
+        if (section.subsections) {
+            section.subsections.forEach(subsection => {
+                html += `<div class="hygiene-subsection">`;
+                html += `<h5>${subsection.subtitle}</h5>`;
+                html += '<ul>';
+                subsection.items.forEach(item => {
+                    html += `<li>${item}</li>`;
+                });
+                html += '</ul>';
+                html += '</div>';
+            });
+        }
+
+        html += '</div>';
+    });
+
+    container.innerHTML = html;
 }
