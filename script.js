@@ -236,11 +236,17 @@ function navigateToPage(pageId) {
 
     // モバイルメニューを閉じる
     document.getElementById('mainNav').classList.remove('open');
+    document.getElementById('navOverlay').classList.remove('active');
 
     // ページに応じた処理
     if (pageId === 'dashboard') {
         updateDashboard();
     }
+}
+
+// メニュー一覧ページを表示
+function showMenuList() {
+    navigateToPage('menu-list');
 }
 
 function showPage(pageId) {

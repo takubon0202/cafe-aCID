@@ -111,6 +111,19 @@
                 </ul>
             </li>
 
+            <!-- フードメニュー -->
+            <li class="nav-category">
+                <div class="nav-category-header" onclick="toggleNavCategory(this)">
+                    <i class="fas fa-bread-slice"></i> フードメニュー
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <ul class="nav-submenu">
+                    <li><a href="#menu-digitalPan" class="nav-link" data-page="menu-digitalPan">
+                        <i class="fas fa-bread-slice"></i> 社会共創デジタル学パン
+                    </a></li>
+                </ul>
+            </li>
+
             <!-- マニュアル・設定 -->
             <li><a href="#service" class="nav-link" data-page="service">
                 <i class="fas fa-store"></i> 提供方法
@@ -138,9 +151,71 @@
         <!-- ダッシュボード -->
         <section id="dashboard" class="page active">
             <h2>ダッシュボード</h2>
+            <p style="text-align: center; margin-bottom: 2rem; color: #666;">必要な情報を選択してください</p>
+
+            <div class="dashboard-main-menu">
+                <!-- メニュー一覧カード -->
+                <div class="main-menu-card" onclick="showMenuList()">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-coffee"></i>
+                    </div>
+                    <h3>メニュー一覧</h3>
+                    <p>全ドリンクメニューの作り方を確認</p>
+                </div>
+
+                <!-- 清掃マニュアルカード -->
+                <div class="main-menu-card" onclick="navigateToPage('cleaning')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3>清掃マニュアル</h3>
+                    <p>日次・週次・月次の清掃手順</p>
+                </div>
+
+                <!-- 衛生マニュアルカード -->
+                <div class="main-menu-card" onclick="navigateToPage('hygiene')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3>衛生マニュアル</h3>
+                    <p>衛生管理と食品安全基準</p>
+                </div>
+
+                <!-- 提供方法カード -->
+                <div class="main-menu-card" onclick="navigateToPage('service')">
+                    <div class="main-menu-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>提供方法</h3>
+                    <p>オペレーションと接客フロー</p>
+                </div>
+            </div>
+
+            <!-- 今日の清掃チェックリスト -->
+            <div class="dashboard-checklist">
+                <div class="section-card">
+                    <h3><i class="fas fa-check-square"></i> 今日の清掃チェックリスト</h3>
+                    <div id="todayChecklist">
+                        <div class="checklist-summary">
+                            <p>完了: <span id="completedCount">0</span> / <span id="totalCount">0</span></p>
+                        </div>
+                        <button class="btn btn-secondary" onclick="navigateToPage('cleaning')">
+                            清掃マニュアルへ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メニュー一覧ページ -->
+        <section id="menu-list" class="page">
+            <h2><i class="fas fa-coffee"></i> メニュー一覧</h2>
+            <button class="btn btn-secondary" onclick="navigateToPage('dashboard')" style="margin-bottom: 1rem;">
+                <i class="fas fa-arrow-left"></i> ホームに戻る
+            </button>
 
             <div class="dashboard-grid">
-                <!-- メニューカード -->
+                <!-- ホットメニューカード -->
                 <div class="section-card">
                     <h3><i class="fas fa-coffee"></i> ホットメニュー</h3>
                     <div class="menu-buttons">
@@ -192,6 +267,7 @@
                     </div>
                 </div>
 
+                <!-- アイスメニューカード -->
                 <div class="section-card">
                     <h3><i class="fas fa-glass-whiskey"></i> アイスメニュー</h3>
                     <div class="menu-buttons">
@@ -228,6 +304,7 @@
                     </div>
                 </div>
 
+                <!-- ジュース・ソーダカード -->
                 <div class="section-card">
                     <h3><i class="fas fa-glass-whiskey"></i> ジュース・ソーダ</h3>
                     <div class="menu-buttons">
@@ -244,30 +321,14 @@
                     </div>
                 </div>
 
-                <!-- 今日の清掃チェックリスト -->
+                <!-- フードメニューカード -->
                 <div class="section-card">
-                    <h3><i class="fas fa-check-square"></i> 今日の清掃チェックリスト</h3>
-                    <div id="todayChecklist">
-                        <div class="checklist-summary">
-                            <p>完了: <span id="completedCount">0</span> / <span id="totalCount">0</span></p>
-                        </div>
-                        <button class="btn btn-secondary" onclick="navigateToPage('cleaning')">
-                            清掃マニュアルへ
-                        </button>
-                    </div>
-                </div>
-
-                <!-- クイックリンク -->
-                <div class="section-card">
-                    <h3><i class="fas fa-link"></i> クイックリンク</h3>
-                    <div class="quick-links">
-                        <button class="quick-link-btn" onclick="navigateToPage('troubleshooting')">
-                            <i class="fas fa-exclamation-triangle"></i>
-                            トラブルシューティング
-                        </button>
-                        <button class="quick-link-btn" onclick="navigateToPage('cleaning')">
-                            <i class="fas fa-broom"></i>
-                            清掃マニュアル
+                    <h3><i class="fas fa-bread-slice"></i> フードメニュー</h3>
+                    <div class="menu-buttons">
+                        <button class="menu-btn" data-page="menu-digitalPan">
+                            <i class="fas fa-bread-slice"></i>
+                            <span>社会共創デジタル学パン</span>
+                            <small>￥300</small>
                         </button>
                     </div>
                 </div>
@@ -622,6 +683,24 @@
                 <div class="info-card"><h4>所要時間</h4><p>約2-3分</p></div>
             </div>
             <div class="menu-content" id="melonSodaContent"></div>
+        </section>
+
+        <!-- 社会共創デジタル学パンマニュアル -->
+        <section id="menu-digitalPan" class="page menu-page">
+            <div class="page-header">
+                <h2><i class="fas fa-bread-slice"></i> 社会共創デジタル学パン</h2>
+                <div class="page-actions">
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-print"></i> 印刷
+                    </button>
+                </div>
+            </div>
+            <div class="menu-info">
+                <div class="info-card"><h4>価格</h4><p class="price">￥300</p></div>
+                <div class="info-card"><h4>容量</h4><p>パン1個 + トッピング2種</p></div>
+                <div class="info-card"><h4>所要時間</h4><p>約3-5分</p></div>
+            </div>
+            <div class="menu-content" id="digitalPanContent"></div>
         </section>
 
         <!-- 清掃マニュアル -->

@@ -298,28 +298,41 @@ main {
 /* ダッシュボード */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
 .section-card {
     background-color: var(--accent-color);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease;
 }
 
 .section-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-hover);
 }
 
 .section-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--primary-color);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -328,41 +341,58 @@ main {
 /* メニューボタン */
 .menu-buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .menu-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .menu-buttons {
+        grid-template-columns: 1fr;
+    }
 }
 
 .menu-btn {
     background-color: var(--background-color);
     border: 2px solid var(--border-color);
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 1rem;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    min-height: 130px;
+    justify-content: center;
 }
 
 .menu-btn:hover {
     background-color: var(--primary-color);
     color: var(--accent-color);
     border-color: var(--primary-color);
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
 }
 
 .menu-btn i {
-    font-size: 2.5rem;
+    font-size: 2rem;
 }
 
 .menu-btn span {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 700;
+    text-align: center;
+    line-height: 1.3;
 }
 
 .menu-btn small {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--secondary-color);
 }
 
@@ -1597,4 +1627,111 @@ footer {
 
 .notes ul {
     margin: 0;
+}
+
+/* ===================================
+   ダッシュボード メインメニューカード
+   =================================== */
+
+.dashboard-main-menu {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.main-menu-card {
+    background-color: var(--accent-color);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+}
+
+.main-menu-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--primary-color);
+}
+
+.main-menu-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.main-menu-card:hover .main-menu-icon {
+    background-color: var(--secondary-color);
+    transform: scale(1.1);
+}
+
+.main-menu-icon i {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+}
+
+.main-menu-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.main-menu-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.dashboard-checklist {
+    margin-top: 3rem;
+}
+
+/* レスポンシブデザイン - タブレット */
+@media screen and (max-width: 768px) {
+    .dashboard-main-menu {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .main-menu-card {
+        padding: 1.5rem;
+    }
+
+    .main-menu-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .main-menu-icon i {
+        font-size: 2rem;
+    }
+
+    .main-menu-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .main-menu-card p {
+        font-size: 0.85rem;
+    }
+}
+
+/* レスポンシブデザイン - モバイル */
+@media screen and (max-width: 480px) {
+    .dashboard-main-menu {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .main-menu-card {
+        padding: 1.5rem;
+    }
 }
