@@ -6,6 +6,7 @@
 let menuData = {};
 let cleaningData = {};
 let serviceData = {};
+let airpayData = {};
 let settings = {};
 
 // ===================================
@@ -57,14 +58,15 @@ function loadData() {
     // メニューデータの読み込み
     const savedMenuData = localStorage.getItem(STORAGE_KEYS.MENU_DATA);
     if (savedMenuData) {
-        menuData = JSON.parse(savedMenuData);
-        // initialDataに新しいメニューがあれば追加
+        const stored = JSON.parse(savedMenuData);
+        // initialDataをベースにマージ（新しい項目を追加し、既存の編集は維持）
+        menuData = {};
         Object.keys(initialData.menu).forEach(menuId => {
-            if (!menuData[menuId]) {
-                menuData[menuId] = initialData.menu[menuId];
-            }
+            menuData[menuId] = {
+                ...initialData.menu[menuId],
+                ...(stored[menuId] || {})
+            };
         });
-        // 更新されたメニューデータを保存
         localStorage.setItem(STORAGE_KEYS.MENU_DATA, JSON.stringify(menuData));
     } else {
         menuData = initialData.menu;
@@ -76,7 +78,37 @@ function loadData() {
 
     // 提供方法データの読み込み
     const savedServiceData = localStorage.getItem(STORAGE_KEYS.SERVICE_DATA);
-    serviceData = savedServiceData ? JSON.parse(savedServiceData) : initialData.service;
+    if (savedServiceData) {
+        const storedService = JSON.parse(savedServiceData);
+        serviceData = {};
+        Object.keys(initialData.service).forEach(key => {
+            serviceData[key] = {
+                ...initialData.service[key],
+                ...(storedService[key] || {})
+            };
+        });
+
+        // 重要フィールド（画像・レイアウト）は常に最新の初期データを優先
+        if (initialData.service.layout?.image) {
+            serviceData.layout.image = initialData.service.layout.image;
+        }
+        if (initialData.service.hours?.normal?.image) {
+            serviceData.hours.normal.image = initialData.service.hours.normal.image;
+        }
+        if (initialData.service.hours?.holiday?.image) {
+            serviceData.hours.holiday.image = initialData.service.hours.holiday.image;
+        }
+        if (initialData.service.staffing?.image) {
+            serviceData.staffing.image = initialData.service.staffing.image;
+        }
+
+        localStorage.setItem(STORAGE_KEYS.SERVICE_DATA, JSON.stringify(serviceData));
+    } else {
+        serviceData = initialData.service;
+    }
+
+    // AirPayデータ
+    airpayData = initialData.airpay;
 
     // 設定の読み込み
     const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
@@ -99,6 +131,9 @@ function loadData() {
 
     // 衛生マニュアルをレンダリング
     renderHygiene();
+
+    // AirPayマニュアルをレンダリング
+    renderAirpay();
 }
 
 function saveData() {
@@ -316,6 +351,18 @@ function renderMenuPages() {
         });
         html += '</ul>';
         html += '</div>';
+
+        // アレルゲンセクション
+        if (menu.allergens && menu.allergens.length > 0) {
+            html += '<div class="allergens-section">';
+            html += '<h3><i class="fas fa-exclamation-circle"></i> アレルゲン</h3>';
+            html += '<ul class="allergens-list">';
+            menu.allergens.forEach(allergen => {
+                html += `<li>${allergen}</li>`;
+            });
+            html += '</ul>';
+            html += '</div>';
+        }
 
         // ステップセクション
         html += '<div class="steps-section">';
@@ -558,6 +605,107 @@ function renderTroubleshooting() {
         html += '</div>';
         html += '</div>';
     });
+
+    container.innerHTML = html;
+}
+
+// ===================================
+// AirPay マニュアル
+// ===================================
+
+function renderAirpay() {
+    const container = document.getElementById('airpayContent');
+    if (!container || !airpayData) return;
+
+    let html = '';
+
+    if (airpayData.title) {
+        html += `<h3>${airpayData.title}</h3>`;
+    }
+
+    if (airpayData.device) {
+        html += `<p><strong>使用機器:</strong> ${airpayData.device}</p>`;
+    }
+
+    if (airpayData.methods && airpayData.methods.length > 0) {
+        html += '<div class="service-section">';
+        html += '<h4><i class="fas fa-cash-register"></i> 決済手順</h4>';
+        airpayData.methods.forEach(method => {
+            html += '<div class="flow-notes">';
+            html += `<strong>${method.name}</strong>`;
+            if (method.steps) {
+                html += '<ol>';
+                method.steps.forEach(step => {
+                    html += `<li>${step}</li>`;
+                });
+                html += '</ol>';
+            }
+            if (method.notes && method.notes.length) {
+                html += '<ul>';
+                method.notes.forEach(note => {
+                    html += `<li>${note}</li>`;
+                });
+                html += '</ul>';
+            }
+            html += '</div>';
+        });
+        html += '</div>';
+    }
+
+    if (airpayData.videos && airpayData.videos.length > 0) {
+        html += '<div class="service-section">';
+        html += '<h4><i class="fas fa-video"></i> 公式動画</h4>';
+        html += '<div class="video-grid">';
+        airpayData.videos.forEach(video => {
+            const videoId = video.videoId || null;
+            html += '<div class="service-figure">';
+            if (videoId) {
+                const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                html += `<a class="video-thumb" href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener">`;
+                html += `<div class="thumb-image" style="background-image:url('${thumb}')"></div>`;
+                html += `<div class="thumb-overlay"><i class="fas fa-play-circle"></i><span>別タブで再生</span></div>`;
+                html += `</a>`;
+            } else {
+                html += `<p><a href="${video.url}" target="_blank" rel="noopener">動画リンクを開く</a></p>`;
+            }
+            html += '</div>';
+        });
+        html += '</div>';
+        html += '</div>';
+    }
+
+    if (airpayData.checklist && airpayData.checklist.length > 0) {
+        html += '<div class="service-section">';
+        html += '<h4><i class="fas fa-clipboard-check"></i> 動画視聴後チェックリスト</h4>';
+        html += '<ul>';
+        airpayData.checklist.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
+
+    if (airpayData.cautions && airpayData.cautions.length > 0) {
+        html += '<div class="service-section">';
+        html += '<h4><i class="fas fa-exclamation-triangle"></i> 注意事項</h4>';
+        html += '<ul>';
+        airpayData.cautions.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
+
+    if (airpayData.troubles && airpayData.troubles.length > 0) {
+        html += '<div class="service-section">';
+        html += '<h4><i class="fas fa-tools"></i> トラブル対応</h4>';
+        html += '<ul>';
+        airpayData.troubles.forEach(item => {
+            html += `<li>${item}</li>`;
+        });
+        html += '</ul>';
+        html += '</div>';
+    }
 
     container.innerHTML = html;
 }
@@ -819,6 +967,121 @@ function renderServicePage() {
             html += `<li>${item}</li>`;
         });
         html += '</ul>';
+        html += '</div>';
+    }
+
+    // 店内動線・レイアウト
+    if (serviceData.layout) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-route"></i> ${serviceData.layout.title}</h3>`;
+        if (serviceData.layout.image) {
+            html += `<div class="service-figure"><img src="${serviceData.layout.image}" alt="店内動線・レイアウト" class="responsive-img"></div>`;
+        }
+        if (serviceData.layout.seats) {
+            html += '<h4>座席構成</h4><ul>';
+            serviceData.layout.seats.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+        if (serviceData.layout.flow) {
+            html += '<h4>動線</h4><ul>';
+            serviceData.layout.flow.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+        if (serviceData.layout.notes) {
+            html += '<h4>補足</h4><ul>';
+            serviceData.layout.notes.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+        html += '</div>';
+    }
+
+    // 営業時間
+    if (serviceData.hours) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-clock"></i> ${serviceData.hours.title}</h3>`;
+        const renderHoursTable = (block) => {
+            html += `<h4>${block.label}</h4>`;
+            html += '<table class="congestion-table"><thead><tr><th>曜日</th><th>時間</th><th>時間数</th></tr></thead><tbody>';
+            block.rows.forEach(row => {
+                html += `<tr><td>${row.day}</td><td>${row.time}</td><td>${row.hours}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            if (block.image) {
+                html += `<div class="service-figure"><img src="${block.image}" alt="${block.label}" class="responsive-img"></div>`;
+            }
+        };
+        if (serviceData.hours.normal) renderHoursTable(serviceData.hours.normal);
+        if (serviceData.hours.holiday) renderHoursTable(serviceData.hours.holiday);
+        if (serviceData.hours.normalImage && !serviceData.hours.normal.image) {
+            html += `<div class="service-figure"><img src="${serviceData.hours.normalImage}" alt="通常営業時間" class="responsive-img"></div>`;
+        }
+        html += '</div>';
+    }
+
+    // 決済・AirPay
+    if (serviceData.payments) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-cash-register"></i> ${serviceData.payments.title}</h3>`;
+        if (serviceData.payments.device) {
+            html += `<p><strong>端末/アプリ:</strong> ${serviceData.payments.device}</p>`;
+        }
+        if (serviceData.payments.commonFlow) {
+            html += '<h4>共通フロー</h4><ul>';
+            serviceData.payments.commonFlow.forEach(step => {
+                html += `<li>${step}</li>`;
+            });
+            html += '</ul>';
+        }
+        if (serviceData.payments.methods) {
+            html += '<h4>決済方式別手順</h4>';
+            serviceData.payments.methods.forEach(method => {
+                html += '<div class="flow-notes">';
+                html += `<strong>${method.name}</strong>`;
+                html += '<ul>';
+                method.steps.forEach(s => {
+                    html += `<li>${s}</li>`;
+                });
+                html += '</ul>';
+                if (method.notes && method.notes.length) {
+                    html += '<ul style="margin-top:0.5rem;">';
+                    method.notes.forEach(n => {
+                        html += `<li>${n}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                html += '</div>';
+            });
+        }
+        html += '</div>';
+    }
+
+    // 店舗運営・シフト
+    if (serviceData.staffing) {
+        html += '<div class="service-section">';
+        html += `<h3><i class="fas fa-users-cog"></i> ${serviceData.staffing.title}</h3>`;
+        if (serviceData.staffing.image) {
+            html += `<div class="service-figure"><img src="${serviceData.staffing.image}" alt="店舗運営シフト" class="responsive-img"></div>`;
+        }
+        if (serviceData.staffing.summary) {
+            html += '<ul>';
+            serviceData.staffing.summary.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
+        if (serviceData.staffing.notes) {
+            html += '<h4>運用メモ</h4><ul>';
+            serviceData.staffing.notes.forEach(item => {
+                html += `<li>${item}</li>`;
+            });
+            html += '</ul>';
+        }
         html += '</div>';
     }
 
