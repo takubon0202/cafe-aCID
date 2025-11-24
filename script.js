@@ -1024,43 +1024,6 @@ function renderServicePage() {
         html += '</div>';
     }
 
-    // 決済・AirPay
-    if (serviceData.payments) {
-        html += '<div class="service-section">';
-        html += `<h3><i class="fas fa-cash-register"></i> ${serviceData.payments.title}</h3>`;
-        if (serviceData.payments.device) {
-            html += `<p><strong>端末/アプリ:</strong> ${serviceData.payments.device}</p>`;
-        }
-        if (serviceData.payments.commonFlow) {
-            html += '<h4>共通フロー</h4><ul>';
-            serviceData.payments.commonFlow.forEach(step => {
-                html += `<li>${step}</li>`;
-            });
-            html += '</ul>';
-        }
-        if (serviceData.payments.methods) {
-            html += '<h4>決済方式別手順</h4>';
-            serviceData.payments.methods.forEach(method => {
-                html += '<div class="flow-notes">';
-                html += `<strong>${method.name}</strong>`;
-                html += '<ul>';
-                method.steps.forEach(s => {
-                    html += `<li>${s}</li>`;
-                });
-                html += '</ul>';
-                if (method.notes && method.notes.length) {
-                    html += '<ul style="margin-top:0.5rem;">';
-                    method.notes.forEach(n => {
-                        html += `<li>${n}</li>`;
-                    });
-                    html += '</ul>';
-                }
-                html += '</div>';
-            });
-        }
-        html += '</div>';
-    }
-
     // 店舗運営・シフト
     if (serviceData.staffing) {
         html += '<div class="service-section">';
