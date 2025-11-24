@@ -16,6 +16,7 @@
     --info-color: #2196F3;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
+    --header-height: 96px;
 }
 
 /* リセット */
@@ -60,10 +61,26 @@ header .container {
 header h1 {
     font-size: 1.5rem;
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 header h1 i {
     margin-right: 0.5rem;
+}
+
+.logo-image {
+    height: 64px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .menu-toggle {
@@ -80,18 +97,20 @@ nav {
     background-color: var(--accent-color);
     box-shadow: var(--shadow);
     position: fixed;
-    top: 60px;
+    top: var(--header-height);
     left: 0;
     width: 280px;
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--header-height));
     overflow-y: auto;
     z-index: 99;
-    transition: transform 0.3s ease;
-    transform: translateX(-280px);
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.4s ease;
+    transform: translateX(-320px);
+    opacity: 0;
 }
 
 nav.open {
     transform: translateX(0);
+    opacity: 1;
 }
 
 nav > ul {
@@ -186,10 +205,10 @@ nav ul li a i {
 .nav-overlay {
     display: none;
     position: fixed;
-    top: 60px;
+    top: var(--header-height);
     left: 0;
     width: 100%;
-    height: calc(100vh - 60px);
+    height: calc(100vh - var(--header-height));
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 98;
     opacity: 0;
@@ -1737,6 +1756,14 @@ footer {
 
 .dashboard-main-menu.two-col {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dashboard-branding {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }
 
 .main-menu-card {
